@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake Review Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            padding: 40px 30px;
+            text-align: center;
+            width: 450px;
+            animation: fadeIn 2s ease;
+            color: #ffffff;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.9);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #00d2ff;
+            text-shadow: 0 0 10px #00d2ff;
+        }
+
+        textarea {
+            width: 100%;
+            height: 160px;
+            padding: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            resize: none;
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            color: #fff;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.6);
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #00ff99;
+        }
+
+        strong {
+            color: #00d2ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🛡️ Fake Review Detector</h2>
+        <form action="/predict" method="POST">
+            <textarea name="review" placeholder="Paste your review here..." required></textarea><br>
+            <button type="submit">Detect Review</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <p><strong>Input:</strong> {{ review }}</p>
+                <p><strong>Prediction:</strong> {{ prediction }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
